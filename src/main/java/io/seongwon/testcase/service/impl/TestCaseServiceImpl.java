@@ -22,17 +22,16 @@ public class TestCaseServiceImpl implements TestCaseService{
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Value("projectNumber")
+	@Value("${projectNumber}")
 	String projectNumber;
 	
-	@Value("templateName")
-	private String templateName = "resources/templates/";
+	private String templatePath = String.format("resources/templates/%s 테스트케이스.xls", projectNumber);
 	
-	private String outputFilePath = String.format("resources/static/%s/%s 테스트케이스.xls", projectNumber);
+	private String outputFilePath = String.format("resources/static/%s/%s 테스트케이스.xls", projectNumber, projectNumber);
 	
 	@Override
 	public void downloadTemplate(List<TestCaseVO> testCaseList) {
-		try (InputStream is = TestCaseServiceImpl.class.getResourceAsStream(templateName)) {
+		try (InputStream is = TestCaseServiceImpl.class.getResourceAsStream(templatePath)) {
 			try (OutputStream os = new FileOutputStream(outputFilePath)) {
 					Context context = new Context();
 					
