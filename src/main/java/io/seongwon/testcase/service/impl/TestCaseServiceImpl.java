@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
-import java.util.Map;
 
 import org.jxls.common.Context;
 import org.jxls.util.JxlsHelper;
@@ -17,16 +16,7 @@ import org.springframework.stereotype.Service;
 
 import io.seongwon.testcase.service.TestCaseService;
 
-/**
- * testCase:
- * h1: 대분류
- * h2: 중분류
- * h3: 소분류
- * scenario: 시나리오
- * input: 입력값
- * output: 기대 출력값
- * result: 결과
- */
+
 @Service
 public class TestCaseServiceImpl implements TestCaseService{
 
@@ -41,7 +31,7 @@ public class TestCaseServiceImpl implements TestCaseService{
 	private String outputFilePath = String.format("resources/static/%s/%s 테스트케이스.xls", projectNumber);
 	
 	@Override
-	public void downloadTemplate(List<Map<String, Object>> testCaseList) {
+	public void downloadTemplate(List<TestCaseVO> testCaseList) {
 		try (InputStream is = TestCaseServiceImpl.class.getResourceAsStream(templateName)) {
 			try (OutputStream os = new FileOutputStream(outputFilePath)) {
 					Context context = new Context();
